@@ -1,0 +1,4 @@
+# Only needed for the robot / simulator path (robot_adapter.py, robot_demo.py)
+numpy>=1.21
+unitree-sdk2py>=1.0
+mujoco>=3.0        # for the unitree_mujoco simulator

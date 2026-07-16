@@ -115,6 +115,39 @@ GPU workstation, once — see below.
 
 ---
 
+## Try it on a robot — in simulation first (no hardware needed)
+
+You don't need a physical robot to test the full loop. Unitree's **`unitree_mujoco`**
+simulator speaks the *same* `LowState` messages as the real robot, so the adapter and
+demo below run **identically in sim and on hardware** — validate everything on a normal
+machine first.
+
+Files:
+- **`robot_adapter.py`** — reads the robot's real body (joint torque/temperature,
+  battery, IMU) from the Unitree SDK `LowState` into the same 4-vector the model uses.
+- **`robot_demo.py`** — runs the embodied loop + "cut the wire" control on the robot's
+  body instead of a laptop's CPU.
+
+Setup (sim):
+```bash
+pip install -r requirements-robot.txt          # unitree-sdk2py + mujoco
+# 1) run the simulator:  https://github.com/unitreerobotics/unitree_mujoco
+#    (simulate_python; pick the Go2 or G1 scene in its config)
+# 2) then, in this repo:
+python robot_adapter.py     # prints the robot's live body vector
+python robot_demo.py        # runs the embodied loop on the robot's body
+```
+
+Platform note: **Go2 / B2 / H1** use the `unitree_go` IDL; **G1 / H1-2** use `unitree_hg`.
+Set `ROBOT = "go2"` or `"g1"` at the top of `robot_adapter.py`. The adapter is a **template**
+— field names follow the documented SDK; verify them against your SDK version (anything
+missing degrades to `0.0` rather than crashing).
+
+Repos: [unitree_mujoco](https://github.com/unitreerobotics/unitree_mujoco) ·
+[unitree_sdk2_python](https://github.com/unitreerobotics/unitree_sdk2_python)
+
+---
+
 ## Hardware requirements
 
 Be clear on the two very different regimes:
