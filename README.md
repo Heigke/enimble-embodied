@@ -141,6 +141,12 @@ Files:
   effort on a hard task it should do at 0.90, and can't tell easy from hard when tired); the
   gated model gets it right. This is the deeper coupling — and the reason the research weaves
   the body in bilinearly. Pure CPU: `python embodied_bilinear.py`
+- **`embodied_deep.py`** — the two pieces together: an agent that **learns online** in the Go2
+  physics loop **and** couples the body **bilinearly**. Honest ordering, exactly as theory
+  predicts — blind < additive < bilinear: the bilinear agent earns **~14% more value** on the
+  same body budget, because it learned to rest the cheap tasks (effort 0.05) but keep working
+  the valuable ones (0.84) when strained — an interaction the additive agent can't represent.
+  `python embodied_deep.py`
 
 Setup (sim):
 ```bash
