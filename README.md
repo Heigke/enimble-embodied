@@ -34,6 +34,27 @@ included here.
 
 ---
 
+## Where the research is (high level)
+
+The full system has been validated on large models — high level, and verified by
+intervention rather than anecdote:
+
+- Demonstrated on a **27B-parameter** LLM, with a cross-check on a second GPU vendor.
+- The body→self coupling lives **in the weights** (not a bolt-on): remove the trained
+  coupling and the effect **collapses**.
+- It is **specific to the real body**: a random or time-scrambled signal produces
+  essentially no effect.
+- It **generalizes** to physical states the coupling never saw during training, and the
+  base model's behavior is **preserved** (a small, contained edit).
+- The model carries its real measured energy in its **own internal workspace**, and can
+  **express its state grounded in that real energy** — verified specific to the real body.
+- We also report the honest **nulls** — where a variant doesn't yet work — because the
+  standard here is intervention, not a good-looking anecdote.
+
+Everything is a **functional** result. No claim is made that anything is *felt*.
+
+---
+
 ## Quickstart
 
 ```bash
