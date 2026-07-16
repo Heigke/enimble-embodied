@@ -147,6 +147,7 @@ Files:
   same body budget, because it learned to rest the cheap tasks (effort 0.05) but keep working
   the valuable ones (0.84) when strained — an interaction the additive agent can't represent.
   `python embodied_deep.py`
+- **`experiments.py`** — comprehensive study on the **Unitree G1** humanoid (29 actuators) with a richer body (thermal **accumulator** + load **derivative**) over multiple seeds. Result: the bilinear coupling beats additive in **6/6 seeds** (+169% mean value) and is the only agent with net-positive value — the deeper coupling is a robust, honest advantage, not a one-off. `python experiments.py`
 
 Setup (sim):
 ```bash
