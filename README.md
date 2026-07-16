@@ -127,6 +127,13 @@ Files:
   battery, IMU) from the Unitree SDK `LowState` into the same 4-vector the model uses.
 - **`robot_demo.py`** — runs the embodied loop + "cut the wire" control on the robot's
   body instead of a laptop's CPU.
+- **`embodied_learning.py`** — an agent in a real Unitree **Go2 MuJoCo** sim that feels
+  the robot's body (joint load → heat, battery) and **learns online to self-regulate**:
+  push when fresh, ease off to cool when hot / low. It corrects its policy each round
+  ("I did that — I actually needed this"). The benefit is honest and specific to feeling
+  the body — in our run the body-**aware** learner cut throttling events **10×** (41→4)
+  and beat the body-**blind** learner on reward, while a fixed max-effort policy throttled
+  ~600×. Runs headless on CPU: `pip install mujoco robot_descriptions numpy && python embodied_learning.py`
 
 Setup (sim):
 ```bash
