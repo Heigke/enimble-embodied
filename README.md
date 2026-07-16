@@ -148,6 +148,7 @@ Files:
   the valuable ones (0.84) when strained — an interaction the additive agent can't represent.
   `python embodied_deep.py`
 - **`experiments.py`** — comprehensive study on the **Unitree G1** humanoid (29 actuators) with a richer body (thermal **accumulator** + load **derivative**) over multiple seeds. Result: the bilinear coupling beats additive in **6/6 seeds** (+169% mean value) and is the only agent with net-positive value — the deeper coupling is a robust, honest advantage, not a one-off. `python experiments.py`
+- **`experiments2.py`** — richness sweep on the **G1**: does a richer body help? Honest finding — the gating advantage is **robust at every richness level** (bilinear positive, additive negative), and the additive agent gains **nothing** from extra channels (it can't route them into the decision). What matters is the body **gating** the computation, not the channel count. `python experiments2.py`
 
 Setup (sim):
 ```bash
