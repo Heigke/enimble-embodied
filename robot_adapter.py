@@ -28,7 +28,11 @@ import numpy as np
 
 # Go2 / B2 / H1 / Go2w  -> "go2" (unitree_go IDL)
 # G1 / H1-2             -> "g1"  (unitree_hg IDL)
-ROBOT = "go2"
+# Default set to G1 (the target platform for this project).
+# Note: G1's LowState (unitree_hg) exposes motor_state[*].tau_est/.temperature and
+# imu_state directly; battery/SoC may live under a different field or topic on your
+# build - the adapter degrades gracefully (missing field -> 0.0), so tune to match.
+ROBOT = "g1"
 
 # --- rough normalisation ranges (tune per platform) ---
 TAU_MAX  = 30.0     # |estimated joint torque| that counts as "fully loaded" [N·m]
