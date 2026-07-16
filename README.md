@@ -134,6 +134,13 @@ Files:
   the body — in our run the body-**aware** learner cut throttling events **10×** (41→4)
   and beat the body-**blind** learner on reward, while a fixed max-effort policy throttled
   ~600×. Runs headless on CPU: `pip install mujoco robot_descriptions numpy && python embodied_learning.py`
+- **`embodied_bilinear.py`** — why the body should **gate the thought (bilinear), not be added**.
+  The right effort depends on body *and* task together (rest cheap tasks when strained, but
+  push the valuable ones), so the body's effect must depend on the task. A best-possible
+  additive model can't represent that (5× higher fit error; it gives a strained robot 0.72
+  effort on a hard task it should do at 0.90, and can't tell easy from hard when tired); the
+  gated model gets it right. This is the deeper coupling — and the reason the research weaves
+  the body in bilinearly. Pure CPU: `python embodied_bilinear.py`
 
 Setup (sim):
 ```bash
