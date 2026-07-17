@@ -49,13 +49,15 @@ for i in range(56):
 TR=np.array(TR); TEMP,BATT,EMAG,EFF,VAL=TR.T
 E_caut, E_bold = 0.05, 1.00     # from embodied_epsilon.py temperament test (theta_D 1.8 vs 0.45)
 
-# ---- gently pose the arms/torso by effort so the robot 'works' vs 'rests' (kinematic, no falling) ----
+# ---- animate the robot by effort: still when resting, a clear march/gesture when working ----
 def pose(i, eff):
     q=home.copy()
-    amp=(0.0 if eff<REST else 0.5*eff)
+    work=max(0.0,(eff-REST)/(1-REST))            # 0 resting -> 1 working hard
+    a=0.09+0.40*work; ph=i*0.9                    # baseline 'alive' sway + strong march when working
     n=len(q)
-    for k in range(7, n):                       # skip the free-joint base (first 7)
-        q[k]=home[k]+amp*np.sin(i*0.6+k)*0.15
+    for k in range(7,n):                          # joints (skip 7-dof free base): alternating swing
+        q[k]=home[k]+a*np.sin(ph + k*1.7)
+    q[2]=home[2]+0.045*work*np.sin(ph*2.0)        # subtle vertical bob = 'alive'
     data.qpos[:]=q; mujoco.mj_forward(model,data)
 
 frames=[]
