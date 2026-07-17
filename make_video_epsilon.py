@@ -18,13 +18,16 @@ from robot_descriptions import g1_mj_description as g1
 
 model = mujoco.MjModel.from_xml_path(g1.MJCF_PATH); data = mujoco.MjData(model)
 model.vis.global_.offwidth = 720; model.vis.global_.offheight = 560   # offscreen buffer >= render size
+model.vis.headlight.ambient[:] = [0.55,0.55,0.55]                     # brighten the scene (osmesa is dim)
+model.vis.headlight.diffuse[:] = [0.85,0.85,0.85]
+model.vis.headlight.specular[:] = [0.3,0.3,0.3]
 NU = model.nu
 if model.nkey > 0:
     mujoco.mj_resetDataKeyframe(model, data, 0)     # standing home pose
 home = data.qpos.copy()
 mujoco.mj_forward(model, data)
 renderer = mujoco.Renderer(model, 560, 720)
-cam = mujoco.MjvCamera(); cam.distance = 2.7; cam.elevation = -8; cam.lookat[:] = [0, 0, 0.9]
+cam = mujoco.MjvCamera(); cam.distance = 2.3; cam.elevation = -6; cam.lookat[:] = [0, 0, 0.85]
 opt = mujoco.MjvOption()
 print("G1 loaded; osmesa renderer ready")
 
