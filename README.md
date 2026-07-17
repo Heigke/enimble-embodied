@@ -149,6 +149,7 @@ Files:
   `python embodied_deep.py`
 - **`experiments.py`** — comprehensive study on the **Unitree G1** humanoid (29 actuators) with a richer body (thermal **accumulator** + load **derivative**) over multiple seeds. Result: the bilinear coupling beats additive in **6/6 seeds** (+169% mean value) and is the only agent with net-positive value — the deeper coupling is a robust, honest advantage, not a one-off. `python experiments.py`
 - **`experiments2.py`** — richness sweep on the **G1**: does a richer body help? Honest finding — the gating advantage is **robust at every richness level** (bilinear positive, additive negative), and the additive agent gains **nothing** from extra channels (it can't route them into the decision). What matters is the body **gating** the computation, not the channel count. `python experiments2.py`
+- **`embodied_epsilon.py`** — the newest architecture on the **G1**: feed the body as a **prediction error** against a homeostatic set-point (not the raw state), define **valence = -d||error||/dt** (a feeling as a *dynamic*: positive when regulating home), gate it bilinearly, and shape it with a slow disposition **theta_D**. Results: valence **tracks** the return to set-point; the body is genuinely **load-bearing** (do-test: corr(error,effort) -0.83 wired -> -0.01 ablated); and the same body under a different theta_D yields **different personalities** (cautious C-3PO rests at 0.05, bold R2-D2 pushes at 0.72). `python embodied_epsilon.py`
 
 Setup (sim):
 ```bash
